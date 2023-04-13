@@ -1,0 +1,23 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "CI completed"
+      - run: echo "CD completed"
+      - uses: RGCsAGupta/gh-actions-trigger-test-2@v1
+        with:
+          app-name: test-app
+          app-version: 1.0.0
+          git-user: ${{ secrets.GH_AUTOMATION_USER }}
+          git-pat: ${{ secrets.GH_PAT }}
